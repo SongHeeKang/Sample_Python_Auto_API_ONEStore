@@ -20,7 +20,7 @@ Jenkins Job으로 매일 08시에 실행해 QA/상용 환경의 API 상태를 �
 
 ## 자동화 WorkFlow
 
-<img src="https://github.com/user-attachments/assets/a9e546d2-c2f6-466a-bac2-648ed0f16479" alt="API 자동화 WorkFlow" width="900">
+<img src="docs/screenshots/01-automation-workflow.png" alt="API 자동화 WorkFlow" width="900">
 
 1. 테스트 플랫폼에서 API TestCase 생성
 2. TestCase별 Assertion 작성
@@ -57,14 +57,14 @@ Jenkins Job으로 매일 08시에 실행해 QA/상용 환경의 API 상태를 �
 
 ### TestCase
 
-<img src="https://github.com/user-attachments/assets/48b8770b-3682-4750-a552-0cd28d806d6a" alt="TestCase 구성" width="300">
+<img src="docs/screenshots/02-testcase.png" alt="TestCase 구성" width="300">
 
 - SERVICE(`[QA] API 자동화-UNIT TEST` 등)별로 TestCase를 관리하고, 그 안에서 API 그룹(`[CCS]`, `[SAC]`, `[MEM]` 등)과 기능 단위로 폴더를 나눴습니다.
 - 같은 API에 대해 정상 케이스와 파라미터 누락(`[M_누락]`), 잘못된 값(`[M_이외]`) 같은 예외 케이스를 함께 작성했습니다.
 
 ### Assertion
 
-<img src="https://github.com/user-attachments/assets/433705a0-6552-4ca0-8421-ac4fae76c5b2" alt="Post-Script Assertion" width="600">
+<img src="docs/screenshots/03-post-script-assertion.png" alt="Post-Script Assertion" width="600">
 
 각 TestCase의 Post-Script에 응답 Body의 필수 필드가 있는지 검증하는 Assertion을 작성했습니다.
 
@@ -89,7 +89,7 @@ try {
 
 ### 1. Suite 실행 (`run_*_suite.py`)
 
-<img src="https://github.com/user-attachments/assets/a8025ee6-4a05-476a-9073-d1d3666ada24" alt="Suite 실행 Python Script" width="500">
+<img src="docs/screenshots/04-suite-python-script.png" alt="Suite 실행 Python Script" width="500">
 
 1. Headless Chrome으로 테스트 플랫폼에 로그인합니다.
 2. Suites 메뉴에서 **SERVICE 필터**와 **SERVICE-VARIABLES(환경 변수)** 를 통신사/환경에 맞게 선택합니다.
@@ -112,7 +112,7 @@ WebDriverWait(driver, 1000).until(
 
 ### 2. 결과 수집 및 리포트 전송 (`get_*_result.py`)
 
-<img src="https://github.com/user-attachments/assets/ed65a2e6-f484-4dcd-b4fb-ec47b078f5ff" alt="Test Suite 검증 결과" width="600">
+<img src="docs/screenshots/05-test-suite-result.png" alt="Test Suite 검증 결과" width="600">
 
 1. Suite 결과 테이블의 텍스트를 읽어 Suite별 **Total / Success / Fail / Script Fail / 수행 시간**을 파싱합니다.
 2. Unit Test는 Suite 카테고리(`[ERR]` 예외, `[MEM]` 회원, `[SAC]`, `[CCS]`)별로, Scenario Test는 복합 시나리오 단위로 Pass/Fail을 집계합니다.
@@ -129,7 +129,7 @@ if 'BAD' in check_bad:
 
 ## Jenkins Job
 
-<img src="https://github.com/user-attachments/assets/d16349ab-782f-45b0-b8a4-f493808816f1" alt="Jenkins Job 목록" width="350">
+<img src="docs/screenshots/06-jenkins-jobs.png" alt="Jenkins Job 목록" width="350">
 
 환경(QA / OSB / 상용)과 테스트 종류(Unit Test / Scenario Test)별로 Jenkins Job을 나눠 구성하고,
 매일 08시에 자동 실행되도록 설정했습니다. 각 Job은 Suite 실행 스크립트(`run_*_suite.py`)를 실행한 뒤
@@ -137,7 +137,7 @@ if 'BAD' in check_bad:
 
 ## JANDI 리포트
 
-<img src="https://github.com/user-attachments/assets/3366491b-a586-4dd5-904b-2f36ac358261" alt="JANDI 메신저 리포트" width="400">
+<img src="docs/screenshots/07-jandi-report.png" alt="JANDI 메신저 리포트" width="400">
 
 Suite 카테고리별 Pass/Fail 집계와 함께, 실패한 API의 이름과 **호출이력 상세 보기** 링크를 메시지로 받아
 담당자가 바로 실패 원인을 확인할 수 있도록 했습니다.
